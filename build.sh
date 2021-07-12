@@ -37,10 +37,11 @@ if [ "$build" = 'r4s' ] || [ "$build" = 'all' ]; then
   $ROOT/steps/05_apply_post_config_patch.sh
 
   #build
-  $ROOT/steps/06_build_openwrt.sh
+  [ "$2" != 'nobuild' ]&&$ROOT/steps/06_build_openwrt.sh
   
 fi
 
+#./build/openwrt/scripts/diffconfig.sh
 
 #build x86 
 if [ "$build" = 'x86' ] || [ "$build" = 'x86_64' ] || [ "$build" = 'all' ]; then
@@ -49,7 +50,7 @@ if [ "$build" = 'x86' ] || [ "$build" = 'x86_64' ] || [ "$build" = 'all' ]; then
   $ROOT/steps/04_setup_config_x86.sh
   
   #build
-  $ROOT/steps/06_build_openwrt.sh
+  [ "$2" != 'nobuild' ]&&$ROOT/steps/06_build_openwrt.sh
 
 fi
 
