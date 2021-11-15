@@ -42,6 +42,8 @@ if [ "$build" = 'r4s' ] || [ "$build" = 'all' ]; then
 fi
 
 #./build/openwrt/scripts/diffconfig.sh
+# update seed
+#./scripts/diffconfig.sh > ../../seed/r4s.seed
 
 #build x86 
 if [ "$build" = 'x86' ] || [ "$build" = 'x86_64' ] || [ "$build" = 'all' ]; then
