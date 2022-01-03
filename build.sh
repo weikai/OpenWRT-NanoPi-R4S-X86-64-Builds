@@ -9,6 +9,9 @@
 #python3-distutils python3-setuptools rsync subversion swig time \
 #xsltproc zlib1g-dev
 
+
+#make menuconfig
+
 ROOT=$(readlink -e $(dirname $0))
 
 
