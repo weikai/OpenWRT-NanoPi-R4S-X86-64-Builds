@@ -74,10 +74,11 @@ jobs:
       - name: Build OpenWRT
         run: /bin/bash steps/06_build_openwrt.sh
 
-      - name: Clean Previous Build Tmp files
-        id: cleanbuild
+      - name: Clean Previous Build Tmp files        
         run: |
-          find build/openwrt/build_dir -maxdepth 2 -type d -name '*-aarch64_generic_*' -exec rm -rf '{}' \;
+          pwd
+          ls 
+          find build/openwrt/build_dir -maxdepth 1 -type d -name '*-aarch64_generic_*' -exec rm -rf '{}' \;
           df -h
 
       - name: Convert R4S config to x86
