@@ -16,7 +16,7 @@ jobs:
 
       steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@main #actions/checkout@v3
 
       - name: Show CPU Model and Free Space
         run: |
