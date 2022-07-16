@@ -32,7 +32,7 @@ jobs:
           echo "UPLOAD_RELEASE=true" >> $GITHUB_ENV
           echo "TZ=America/New_York" >>$GITHUB_ENV
           echo "Build_Date=$(date +%Y.%m.%d)" >> $GITHUB_ENV
-          echo "RELTAG=v$(date +'%Y%m%d.%H%M%S') ($(git rev-parse --abbrev-ref HEAD))" >> $GITHUB_ENV
+          echo "RELTAG=v$(date +'%Y%m%d') ($(git rev-parse --abbrev-ref HEAD))" >> $GITHUB_ENV
           
       - name: Show env
         run: echo $GITHUB_ENV
