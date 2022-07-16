@@ -25,13 +25,14 @@ jobs:
           free -h
       - name: Set env
         run: |
+          pwd
           echo "SSH_ACTIONS=false" >> $GITHUB_ENV
           echo "UPLOAD_BIN_DIR=false" >> $GITHUB_ENV
           echo "UPLOAD_FIRMWARE=true" >> $GITHUB_ENV
           echo "UPLOAD_RELEASE=true" >> $GITHUB_ENV
           echo "TZ=America/New_York" >>$GITHUB_ENV
           echo "Build_Date=$(date +%Y.%m.%d)" >> $GITHUB_ENV
-          echo "RELTAG=v$(date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
+          echo "RELTAG=v$(date +'%Y%m%d.%H%M%S') ($(git rev-parse --abbrev-ref HEAD))" >> $GITHUB_ENV
           
       - name: Show env
         run: echo $GITHUB_ENV
@@ -86,12 +87,12 @@ jobs:
       - name: Build OpenWRT for x86_64
         run: /bin/bash steps/06_build_openwrt.sh
       
-      - name: Set env
-        run: |
-          echo "TZ=america/new_york" >>$GITHUB_ENV
-          echo "Build_Date=$(date +%Y-%m-%d %H:%M)" >> $GITHUB_ENV
-          echo "RELTAG=$(date +'%Y%m%d.%H%M')" >> $GITHUB_ENV
-          echo "RELDATE=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
+#      - name: Set env
+#        run: |
+#          echo "TZ=america/new_york" >>$GITHUB_ENV
+#          echo "Build_Date=$(date +%Y-%m-%d %H:%M)" >> $GITHUB_ENV
+#          echo "RELTAG=$(date +'%Y%m%d.%H%M')" >> $GITHUB_ENV
+#          echo "RELDATE=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
       
       - name: Organize files
         id: organizefiles
@@ -113,9 +114,9 @@ jobs:
         uses: ncipollo/release-action@v1.8.4
         if: env.UPLOAD_RELEASE == 'true' && !cancelled()
         with:
-          name: OpenWrt ${{ env.RELDATE }} 
+          name: OpenWrt ${{ env.RELTAG }} 
           allowUpdates: true
-          tag: openwrt-${{ env.RELDATE }}
+          tag: openwrt-${{ env.RELTAG }}
           commit: main
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
