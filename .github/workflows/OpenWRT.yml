@@ -16,7 +16,7 @@ jobs:
 
       steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@main #actions/checkout@v3
 
       - name: Show CPU Model and Free Space
         run: |
@@ -34,7 +34,7 @@ jobs:
           echo "Build_Date=$(date +%Y.%m.%d)" >> $GITHUB_ENV
           echo "RELTAG=$(date +'%Y%m%d.%H%M')" >> $GITHUB_ENV
           echo "RELDATE=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
-          echo "BUILD=$(Git_Branch=$(git rev-parse --abbrev-ref HEAD) && if [ "$Git_Branch" = 'main' ]; then echo snapshot; else echo $Git_Branch;fi)"
+          echo "BUILD=$(Git_Branch=$(git rev-parse --abbrev-ref HEAD) && if [ "$Git_Branch" = 'main' ]; then echo snapshot; else echo $Git_Branch;fi)" >> $GITHUB_ENV
           
       - name: Show env
         run: echo $GITHUB_ENV
