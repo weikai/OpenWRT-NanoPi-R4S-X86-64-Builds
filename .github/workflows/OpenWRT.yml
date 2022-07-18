@@ -34,7 +34,8 @@ jobs:
           echo "Build_Date=$(date +%Y.%m.%d)" >> $GITHUB_ENV
           echo "RELTAG=$(date +'%Y%m%d.%H%M')" >> $GITHUB_ENV
           echo "RELDATE=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
-          echo "Build_Branch=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+          echo "Git_Branch=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+          echo "BUILD=$(if [ "$Git_Branch" = 'main' ]; then echo snapshot; else echo $Git_Branch;fi)" >> $GITHUB_ENV
           
       - name: Show env
         run: echo $GITHUB_ENV
@@ -116,7 +117,7 @@ jobs:
         uses: ncipollo/release-action@v1.8.4
         if: env.UPLOAD_RELEASE == 'true' && !cancelled()
         with:
-          name: OpenWrt ${{ env.RELDATE }} (${{ env.Build_Branch }})
+          name: OpenWrt ${{ env.RELDATE }} (${{ env.BUILD }})
           allowUpdates: true
           tag: openwrt-${{ env.RELTAG }}
           commit: main
