@@ -8,3 +8,6 @@ cd $OPENWRT_FOLDER
 
 [ -f .config ]&&mv .config .config.bak
 cp $ROOT/seed/r4s.seed .config && make defconfig
+
+## make menuconfig
+## ./scripts/diffconfig.sh > r4s.seed.bak
