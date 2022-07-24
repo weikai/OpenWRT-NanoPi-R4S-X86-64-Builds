@@ -101,7 +101,7 @@ jobs:
         run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
-          find build/openwrt/bin/targets -type f \( -name '*.img.gz' -o -name 'config.buildinfo' \) -exec mv '{}' ./artifact/ \;
+          find build/openwrt/bin/targets -type f \( -name '*.img.gz' -o -name 'config*.buildinfo' \) -exec mv '{}' ./artifact/ \;
           ls -al ./artifact/                          
       
       - name: Upload artifact
