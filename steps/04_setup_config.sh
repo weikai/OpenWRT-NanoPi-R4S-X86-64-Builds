@@ -9,7 +9,7 @@ cd $OPENWRT_FOLDER
 
 
 [ -f .config ]&&mv .config .config.bak
-cp $ROOT/seed/r4s.seed .config && make defconfig
+cp $SEED .config && make defconfig
 
 ## make menuconfig
-./scripts/diffconfig.sh > $ROOT/seed/r4s.seed.new
+#./scripts/diffconfig.sh > $ROOT/seed/r4s.seed.new
