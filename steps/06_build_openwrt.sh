@@ -19,8 +19,12 @@ if grep 'CONFIG_TARGET_.*r4s=y' seed.tmp > /dev/null; then
   fi
 elif grep 'CONFIG_TARGET_.*x86_64=y' seed.tmp > /dev/null; then
   echo "Building x86_64 image"
+
   diff -u ${SEED} seed.tmp > seed_patch.tmp
-  if [ -n "$(diff $ROOT/seed/r4s_x86_64.patch seed_patch.tmp)" ]; then
+  md5sum_old=$(grep -v '/' $ROOT/seed/r4s_x86_64.patch|md5sum|cut -d ' ' -f1)
+  md5sum_new=$(grep -v '/' seed_patch.tmp|md5sum|cut -d ' ' -f1)
+
+  if [ -n "$md5sum_old" != "$ md5sum_new" ]; then
      cp seed_patch.tmp $ROOT/seed/r4s_x86_64.patch.new
   fi
 
