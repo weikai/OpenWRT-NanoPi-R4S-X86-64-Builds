@@ -3,6 +3,8 @@
 ROOT=$(readlink -e $(dirname $0))
 . $ROOT/.env
 
+env
+
 [ ! -d $BUILD_FOLDER ]&& mkdir -p "$BUILD_FOLDER"
 
 cd $BUILD_FOLDER
